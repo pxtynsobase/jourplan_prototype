@@ -41,6 +41,6 @@ No application backend endpoints or service API keys are used. Internet access i
 - `scripts/`: dependency-free local server and build.
 - `tests/`: planning and API removal checks.
 - `.github/workflows/pages.yml`: deployment workflow.
-- `web/u_topia/`: retained SwiftUI prototype, excluded from the website build. Its currency service also uses sample rates.
 
 The former unused Next.js frontend and server endpoints were removed when migrating the existing static interface to GitHub Pages.
+
