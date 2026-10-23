@@ -1354,7 +1354,7 @@ function mapPage() {
     centerLng = lngs.length ? (Math.min(...lngs) + Math.max(...lngs)) / 2 : (trip?.lng || 100.5018);
   }
 
-  // Initialize clean interactive Google Map anchored to real coordinates
+  // Initialize the map using bundled place coordinates
   initRecommendMap(centerLat, centerLng, visible);
 
   const list = visible.map(p => `
@@ -1505,7 +1505,7 @@ function priceScanCard() {
   const favorite = state.scan.currentFavorite || state.favorites.some(f => f.priceCurrency === state.priceCurrency && Math.abs(f.price - state.scan.price) < .001);
   return `<section class="scan-card">
     <div class="scan-card-head"><button data-action="keypad" data-target="price">${icon('pencil', 14)} Edit</button><span class="spacer"></span><button class="favorite ${favorite ? 'on' : ''}" data-action="favorite" aria-label="Save favorite">${icon(favorite ? 'heart.fill' : 'heart', 19)}</button></div>
-    <div class="scan-values"><div class="scan-value"><label>PRICE FOUND</label><strong>${currencyFormat(state.scan.price, state.priceCurrency)}</strong></div><div class="scan-value converted"><label>CONVERTED</label><strong>${converted}</strong></div></div>
+    <div class="scan-values"><div class="scan-value"><label>PRICE FOUND</label><strong>${currencyFormat(state.scan.price, state.priceCurrency)}</strong></div><div class="scan-value converted"><label>CONVERTED · SAMPLE RATE</label><strong>${converted}</strong></div></div>
     <input class="text-input" aria-label="Scanned product name" data-field="product" value="${escapeHtml(state.scan.product)}" placeholder="Item name"/>
     <div class="scan-actions"><button class="secondary-button" data-action="add-cart">${icon('cart.badge.plus')} Add to cart</button><button class="primary-button" data-action="calculate-change">Calculate change ${icon('arrow.right')}</button></div>
   </section>`;
@@ -3357,7 +3357,7 @@ render = function() {
   originalRender();
   setupHorizontalScrollers();
 
-  // Initialize Google Maps for trip overview or day route popup
+  // Initialize the map for the trip overview or day route popup
   if ((state.modal?.type === 'trip' || state.modal?.type === 'dayMap') && window._initTripMap && window.L) {
     const trip = state.trips.find(t => t.id === (state.modal.tripId || state.modal.id)) || state.trips.find(t => t.id === state.selectedTrip);
     if (trip) {
@@ -3388,3 +3388,4 @@ render = function() {
 
 render();
 fetchRate();
+

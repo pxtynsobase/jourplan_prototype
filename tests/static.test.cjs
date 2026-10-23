@@ -22,3 +22,23 @@ test('creates a multi-day plan using places from the chosen city', () => {
 test('unsupported destinations do not receive unrelated fallback places', () => {
   assert.throws(() => vm.runInContext("buildLocalPlan({name:'Unknown'}, '2026-10-23', '2026-10-23', 2, [])",context), /supported destinations/);
 });
+test('app starts, creates a trip, and renders primary screens without a backend', async () => {
+  const phone = { innerHTML:'', style:{setProperty(){}}, addEventListener(){}, querySelectorAll:()=>[] };
+  const storage = new Map();
+  const browser = vm.createContext({
+    document:{getElementById:id=>id === 'phone' ? phone : null, body:{classList:{toggle(){}}}, querySelectorAll:()=>[]},
+    window:{}, navigator:{}, console,
+    localStorage:{getItem:key=>storage.get(key) ?? null, setItem:(key,value)=>storage.set(key,value)},
+    setTimeout:()=>0, clearTimeout(){}
+  });
+  vm.runInContext(source,browser);
+  assert.match(phone.innerHTML,/My Trips/);
+  const initialCount = vm.runInContext('state.trips.length',browser);
+  await vm.runInContext("state.composer.start='2026-10-23'; state.composer.end='2026-10-25'; createTrip()",browser);
+  assert.match(phone.innerHTML,/Bangkok/);
+  assert.equal(JSON.parse(storage.get('planner.trips')).length,initialCount + 1);
+  for (const tab of ['booking','money','recommend','trip']) {
+    vm.runInContext(`state.modal=null; state.tab='${tab}'; render()`,browser);
+    assert.ok(phone.innerHTML.length > 100);
+  }
+});
