@@ -2,6 +2,8 @@
 
 A static travel planner built with HTML, CSS, and JavaScript. Runs on GitHub Pages without a backend, API keys, or environment variables.
 
+Jourplan is an experimental prototype app used in the U-Hackathon competition. It was created to demonstrate and test the concept during the event.
+
 **Website:** https://pxtynsobase.github.io/jourplan_prototype/
 
 ## Features
