@@ -1,10 +1,23 @@
-# Jourplan Prototype
+# Jourplan — Travel Planning Prototype
 
-A static travel planner built with HTML, CSS, and JavaScript. Runs on GitHub Pages without a backend, API keys, or environment variables.
+A browser-based travel planning prototype that brings itineraries, destination discovery, and travel spending tools into one interface.
 
-Jourplan is an experimental prototype app used in the U-Hackathon competition. It was created to demonstrate and test the concept during the event.
+**Context:** Experimental app used in the **U-Hackathon** competition to demonstrate and test the concept.
 
-**Website:** https://pxtynsobase.github.io/jourplan_prototype/
+[View live demo](https://pxtynsobase.github.io/jourplan_prototype/) · [Explore the source](web/)
+
+## Project overview
+
+Jourplan explores how travelers can plan a trip, discover places, and manage everyday purchases within a single browser experience. The current implementation uses curated destination data and browser-based processing, allowing the prototype to run on GitHub Pages without application backend services or API keys.
+
+| Area | Implementation |
+| --- | --- |
+| Interface | HTML, CSS, JavaScript |
+| Maps | Leaflet and OpenStreetMap |
+| Price recognition | Browser-side Tesseract OCR |
+| Persistence | Browser local storage |
+| Hosting | GitHub Pages with GitHub Actions |
+| Validation | Automated checks using the Node.js test runner |
 
 ## Features
 
